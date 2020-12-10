@@ -46,7 +46,7 @@ def chatwork_webhook(request):
     locale = "vi"
     if lang == "vi":
         locale = "ja"
-    translated = translator.translate(messageChat, src=lang, dest=locale)
+    #translated = translator.translate(messageChat, src=lang, dest=locale)
 
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
