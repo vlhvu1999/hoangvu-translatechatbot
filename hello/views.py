@@ -29,4 +29,28 @@ def decode_payload(request):
 
 @csrf_exempt
 def chatwork_webhook(request):
+    try:
+        CHECK = "#"
+
+        payload = decode_payload(request)
+        messageChat = payload["webhook_event"]["body"]
+
+
+        if not CHECK in messageChat:
+            return HttpResponse('Webhook received', status=200)
+        elif CHECK != messageChat[0]:
+            return HttpResponse('Webhook received', status=200)
+        messageChat = messageChat.replace(CHECK,"")
+        translator = Translator()
+        lang = detect(messageChat)
+
+        locale = "vi"
+        if lang == "vi":
+            locale = "ja"
+        translated = translator.translate(messageChat, src=lang, dest=locale).text
+        client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
+        res = client.get_messages(room_id='197925987', force=True)
+        client.post_messages(room_id='197925987', message=translated)
+    except:
+         print("type error: "+ str(the_error))
     return HttpResponse('Webhook received', status=200)
