@@ -52,7 +52,7 @@ def chatwork_webhook(request):
     locale = "vi"
     if lang == "vi":
         locale = "ja"
-    #translated = translator.translate(messageChat, src=lang, dest=locale)
+    translated = translator.translate(messageChat, src='lang', dest='locale')
 
 
 
