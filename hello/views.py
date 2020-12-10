@@ -42,15 +42,18 @@ def chatwork_webhook(request):
         return HttpResponse('Webhook received', status=200)
     messageChat = messageChat.replace(CHECK,"")
 
-    translator = Translator(service_urls=['translate.googleapis.com'])
+    #translator = Translator(service_urls=['translate.googleapis.com'])
 
-    lang = detect(messageChat)
+    #lang = detect(messageChat)
 
-    locale = "vi"
-    if lang == "vi":
-       locale = "ja"
+    #locale = "vi"
+    #if lang == "vi":
+    #   locale = "ja"
 
-    translated = translator.translate(messageChat, src=lang, dest=locale).text
+    #translated = translator.translate(messageChat, src=lang, dest=locale).text
+    translations = translator.translate(['see if this helps', 'tarun'], dest='hi')  # translate two phrases to Hindi
+    for translation in translations:  # print every translation
+        print(translation.text)
 
 
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
@@ -59,7 +62,7 @@ def chatwork_webhook(request):
     res = client.get_messages(room_id='197925987', force=True)
 
 
-    client.post_messages(room_id='197925987', message= translated)
+    client.post_messages(room_id='197925987', message= translation.text)
 
 
     return HttpResponse('Webhook received', status=200)

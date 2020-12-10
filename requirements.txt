@@ -4,4 +4,4 @@ django-heroku
 django-chatwork
 pychatwork
 langdetect
-googletrans==4.0.0rc1
+googletrans
