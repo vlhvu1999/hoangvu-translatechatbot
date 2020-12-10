@@ -45,17 +45,13 @@ def chatwork_webhook(request):
     translator = Translator()
     lang = detect(messageChat)
 
-    #locale = "vi"
-    #if lang == "vi":
-    #    locale = "ja"
-    #translated = translator.translate(messageChat, src=lang, dest=locale)
+    locale = "vi"
+    if lang == "vi":
+        locale = "ja"
 
-    translated = translator.translate('안녕하세요.')
-    Translated src=ko dest=en text=Good evening. pronunciation=Good evening
-    translated = translator.translate('안녕하세요.', dest='ja')
-    Translated src=ko dest=ja text=こんにちは。 pronunciation=Kon'nichiwa.
-    translated = translator.translate('veritas lux mea', src='la')
-    Translated src=la dest=en text=The truth is my light pronunciation=The truth is my light
+    translated = translator.translated(messageChat, src=lang, dest=locale)
+
+
 
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
