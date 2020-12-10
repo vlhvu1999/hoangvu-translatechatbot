@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Greeting
 
 from googletrans import Translator
+
 from django.views.decorators.csrf import csrf_exempt
 from langdetect import detect
 import json
@@ -41,8 +42,11 @@ def chatwork_webhook(request):
         return HttpResponse('Webhook received', status=200)
     messageChat = messageChat.replace(CHECK,"")
 
+    translator = Translator(service_urls=[
+          'translate.google.com',
+          'translate.google.co.kr',
+        ])
 
-    translator = Translator()
     lang = detect(messageChat)
 
     locale = "vi"
@@ -52,12 +56,14 @@ def chatwork_webhook(request):
 
 
 
+
+
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
     res = client.get_messages(room_id='197925987', force=True)
 
 
-    client.post_messages(room_id='197925987', message='translate')
+    client.post_messages(room_id='197925987', message='translated')
 
 
     return HttpResponse('Webhook received', status=200)
