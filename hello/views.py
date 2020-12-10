@@ -42,10 +42,7 @@ def chatwork_webhook(request):
         return HttpResponse('Webhook received', status=200)
     messageChat = messageChat.replace(CHECK,"")
 
-    translator = Translator(service_urls=[
-          'translate.google.com',
-          'translate.google.co.kr',
-        ])
+    translator = Translator()
 
     lang = detect(messageChat)
 
@@ -53,7 +50,6 @@ def chatwork_webhook(request):
     if lang == "vi":
        locale = "ja"
        translated = translator.translate(messageChat, src=lang, dest=locale).text
-    translated1 =translated()
 
 
 
@@ -63,7 +59,7 @@ def chatwork_webhook(request):
     res = client.get_messages(room_id='197925987', force=True)
 
 
-    client.post_messages(room_id='197925987', message=translated1)
+    client.post_messages(room_id='197925987', message=translated)
 
 
     return HttpResponse('Webhook received', status=200)
