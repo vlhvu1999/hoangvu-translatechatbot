@@ -40,20 +40,29 @@ def chatwork_webhook(request):
     elif CHECK != messageChat[0]:
         return HttpResponse('Webhook received', status=200)
     messageChat = messageChat.replace(CHECK,"")
+
+
     translator = Translator()
     lang = detect(messageChat)
 
-    locale = "vi"
-    if lang == "vi":
-        locale = "ja"
+    #locale = "vi"
+    #if lang == "vi":
+    #    locale = "ja"
     #translated = translator.translate(messageChat, src=lang, dest=locale)
+
+    translated = translator.translate('안녕하세요.')
+    Translated src=ko dest=en text=Good evening. pronunciation=Good evening
+    translated = translator.translate('안녕하세요.', dest='ja')
+    Translated src=ko dest=ja text=こんにちは。 pronunciation=Kon'nichiwa.
+    translated = translator.translate('veritas lux mea', src='la')
+    Translated src=la dest=en text=The truth is my light pronunciation=The truth is my light
 
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
     res = client.get_messages(room_id='197925987', force=True)
 
 
-    client.post_messages(room_id='197925987', message='messageChat')
+    client.post_messages(room_id='197925987', message='translated')
 
 
     return HttpResponse('Webhook received', status=200)
