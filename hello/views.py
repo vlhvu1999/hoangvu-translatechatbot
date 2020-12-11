@@ -5,7 +5,7 @@ from .models import Greeting
 from googletrans import Translator
 
 from django.views.decorators.csrf import csrf_exempt
-from langdetect import detect
+#from langdetect import detect
 import json
 import pychatwork as ch
 import re
@@ -74,7 +74,7 @@ def chatwork_webhook(request):
     res = client.get_messages(room_id='197925987', force=True)
 
     # post message to room 1234
-    client.post_messages(room_id='197925987', message=t)
+    client.post_messages(room_id='197925987', message=t.text)
 
 
     return HttpResponse('Webhook received', status=200)
