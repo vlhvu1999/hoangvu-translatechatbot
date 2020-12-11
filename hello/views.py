@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Greeting
+
 from googletrans import Translator
+
 from django.views.decorators.csrf import csrf_exempt
+from langdetect import detect
 import json
 import pychatwork as ch
-
+import re
 
 # Create your views here.
 def index(request):
@@ -49,32 +52,25 @@ def chatwork_webhook(request):
 
 
     #translate message
-    #translator = Translator()
+    translator = Translator()
 
-    #lang = detect(messageChat)
+    lang = detect(messageChat)
 
-    #locale = "vi"
-    #if lang == "vi":
-    #    locale = "ja"
+    locale = "vi"
+    if lang == "vi":
+        locale = "ja"
 
-    #translated = translator.translate(messageChat, src=lang, dest=locale).text
-# translate message
-
-
-translator = Translator()
+    translated = translator.translate(messageChat, src=lang, dest=locale)
 
 
+    #Send Data back to chatwork
+    client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
+
+    # get message from room 1234
+    res = client.get_messages(room_id='197925987', force=True)
+
+    # post message to room 1234
+    client.post_messages(room_id='197925987', message=translated.text)
 
 
-translated = translator.translate(messageChat, src="vi", dest="ja")
-
-
-# Send Data back to chatwork
-client = ch.ChatworkClient('b3e674b8b0ccb5cf9d076661df3f4984')
-
-# get message from room 1234
-res = client.get_messages(room_id='197925987', force=True)
-
-# post message to room 1234
-client.post_messages(room_id='197925987', message=translated.text)
-
+    return HttpResponse('Webhook received', status=200)
