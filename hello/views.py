@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Greeting
-
 from googletrans import Translator
 
 from django.views.decorators.csrf import csrf_exempt
-#from langdetect import detect
+
 import json
 import pychatwork as ch
-import re
+
 
 # Create your views here.
 def index(request):
@@ -62,8 +61,8 @@ def chatwork_webhook(request):
 
     #translated = translator.translate(messageChat, src=lang, dest=locale).text
 
-    #translator = Translator()
-    #translated = translator.translate(messageChat, src='vi', dest='ja')
+    translator = Translator()
+    translated = translator.translate(messageChat, src='vi', dest='ja')
 
 
 
@@ -76,7 +75,7 @@ def chatwork_webhook(request):
     res = client.get_messages(room_id='197925987', force=True)
 
     # post message to room 1234
-    client.post_messages(room_id='197925987', message='translated.text')
+    client.post_messages(room_id='197925987', message=translated.text)
 
 
     return HttpResponse('Webhook received', status=200)

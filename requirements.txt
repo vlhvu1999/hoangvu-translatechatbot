@@ -3,5 +3,4 @@ gunicorn
 django-heroku
 django-chatwork
 pychatwork
-langdetect
 googletrans
