@@ -62,7 +62,7 @@ def chatwork_webhook(request):
     #translated = translator.translate(messageChat, src=lang, dest=locale).text
 
     translator = Translator()
-    translated = translator.translate(messageChat, src='vi', dest='ja')
+    translated = translator.translate(messageChat, src="vi", dest="ja")
 
 
 
