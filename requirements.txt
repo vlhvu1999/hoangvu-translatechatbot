@@ -4,3 +4,4 @@ django-heroku
 django-chatwork
 pychatwork
 googletrans
+langdetect
