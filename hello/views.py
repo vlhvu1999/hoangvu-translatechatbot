@@ -52,7 +52,7 @@ def chatwork_webhook(request):
 
 
     #translate message
-    translator = Translator(service_urls=['translate.google.com','translate.google.co.kr',])
+    translator = Translator(service_urls=None, user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64)', proxies=None, timeout=None)
 
     lang = detect(messageChat)
 
