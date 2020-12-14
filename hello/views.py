@@ -15,14 +15,14 @@ def index(request):
     # return HttpResponse('Hello from Python!')
     payload = str(request.body, encoding='utf-8')
     return render(request, "index.html")
-def db(request):
-
-    greeting = Greeting()
-    greeting.save()
-
-    greetings = Greeting.objects.all()
-
-    return render(request, "db.html", {"greetings": greetings})
+# def db(request):
+#
+#     greeting = Greeting()
+#     greeting.save()
+#
+#     greetings = Greeting.objects.all()
+#
+#     return render(request, "db.html", {"greetings": greetings})
 # Create your views here.
 def decode_payload(request):
     payload = str(request.body, encoding='utf-8')
@@ -31,24 +31,26 @@ def decode_payload(request):
 @csrf_exempt
 def chatwork_webhook(request):
 
-    ACCOUNT_ID_BOT = 5130876
-    CHECK = "#"
-
+    # ACCOUNT_ID_BOT = 5130876
+    # CHECK = "#"
+    #
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
-
-    #systax translate
-    if not CHECK in messageChat:
-        return HttpResponse('Webhook received', status=200)
-    elif CHECK != messageChat[0]:
-        return HttpResponse('Webhook received', status=200)
-    messageChat = messageChat.replace(CHECK,"")
-
-
-    #account_id bot not translate
-    accountId = payload["webhook_event"]["account_id"]
-    if accountId == ACCOUNT_ID_BOT:
-        return HttpResponse('Webhook received', status=200)
+    messageChat1 = messageChat.replace("[To:5130876]Bot_Translate", "")
+    # messageChat = payload["webhook_event"]["body"]
+    #
+    # #systax translate
+    # if not CHECK in messageChat:
+    #     return HttpResponse('Webhook received', status=200)
+    # elif CHECK != messageChat[0]:
+    #     return HttpResponse('Webhook received', status=200)
+    # messageChat = messageChat.replace(CHECK,"")
+    #
+    #
+    # #account_id bot not translate
+    # accountId = payload["webhook_event"]["account_id"]
+    # if accountId == ACCOUNT_ID_BOT:
+    #     return HttpResponse('Webhook received', status=200)
 
 
     #translate message
