@@ -37,7 +37,7 @@ def chatwork_webhook(request):
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
     print(messageChat)
-    #systax translate
+    #systax
     if not CHECK in messageChat:
         return HttpResponse('Webhook received', status=200)
     elif CHECK != messageChat[0]:
