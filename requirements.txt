@@ -5,3 +5,4 @@ django-chatwork
 pychatwork
 googletrans
 langdetect
+google_trans_new
