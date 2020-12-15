@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Greeting
 
-from googletrans import Translator
+from google_trans_new import google_translator
 
 from django.views.decorators.csrf import csrf_exempt
 from langdetect import detect
@@ -52,7 +52,7 @@ def chatwork_webhook(request):
 
 
     #translate message
-    translator = Translator()
+    translator = google_translator()
 
     lang = detect(messageChat)
 
