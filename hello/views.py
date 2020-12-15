@@ -36,7 +36,7 @@ def chatwork_webhook(request):
 
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
-print(messageChat)
+    print(messageChat)
     #systax translate
     if not CHECK in messageChat:
         return HttpResponse('Webhook received', status=200)
@@ -70,7 +70,7 @@ print(messageChat)
     res = client.get_messages(room_id='197925987', force=True)
 
     # post message to room 1234
-    client.post_messages(room_id='197925987', message="auto repy")
+    client.post_messages(room_id='197925987', message=messageChat)
 
 
     return HttpResponse('Webhook received', status=200)
