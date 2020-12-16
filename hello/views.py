@@ -34,16 +34,9 @@ def chatwork_webhook(request):
     ACCOUNT_ID_BOT = 5130876
     CHECK = "#"
 
-
-
-    messageChat = payload["webhook_event"]["body"]
-    roomId = payload["webhook_event"]["room_id"]
-    print(messageChat)
-
-    #Send Data back to chatwork
-    client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
-    res = client.get_messages(room_id=roomId, force=True)
     payload = decode_payload(request)
+    messageChat = payload["webhook_event"]["body"]
+    print(messageChat)
 
     #systax
     if not CHECK in messageChat:
@@ -55,7 +48,7 @@ def chatwork_webhook(request):
     #account_id bot not translate
 #     accountId = payload["webhook_event"]["account_id"]
     # get message from room id
-
+    roomId = payload["webhook_event"]["room_id"]
 #     from_account_id = payload["webhook_event"]["from_account_id"]
 #     json_string = json.dumps(from_account_id)
 #     print("from_account_id" + json_string)
@@ -77,12 +70,12 @@ def chatwork_webhook(request):
     translated = translator.translate(messageChat, lang_src=lang, lang_tgt=locale)
 
 
+    #Send Data back to chatwork
+    client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
-
-
+    res = client.get_messages(room_id=roomId, force=True)
 
     # post message to room 1234
     client.post_messages(room_id=roomId, message=translated)
-
 
     return HttpResponse('Webhook received', status=200)
