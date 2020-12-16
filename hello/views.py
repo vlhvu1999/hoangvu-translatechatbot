@@ -45,7 +45,7 @@ def chatwork_webhook(request):
     FormACI = payload["webhook_event"]["from_account_id"]
     messageChat = messageChat.replace(CHECK,"\n")
     messageChat = messageChat.replace(CHECK2,"\n")
-    messageChat = "[To:'".FormACI."']\n"
+    messageChat = "[To:" .format(FormACI). "]\n"
     #account_id bot not translate
 #     accountId = payload["webhook_event"]["account_id"]
     # get message from room id
