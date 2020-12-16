@@ -38,10 +38,10 @@ def chatwork_webhook(request):
     print(messageChat)
 
     #systax
-#     if not CHECK in messageChat:
-#         return HttpResponse('Webhook received', status=200)
-#     elif CHECK != messageChat[0]:
-#         return HttpResponse('Webhook received', status=200)
+    if not CHECK in messageChat:
+        return HttpResponse('Webhook received', status=200)
+    elif CHECK != messageChat[0]:
+        return HttpResponse('Webhook received', status=200)
     messageChat = messageChat.replace(CHECK,"\n")
 
     #account_id bot not translate
