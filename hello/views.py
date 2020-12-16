@@ -47,6 +47,7 @@ def chatwork_webhook(request):
 
     #account_id bot not translate
     accountId = payload["webhook_event"]["account_id"]
+    from_account_id = payload["webhook_event"]["from_account_id"]
     if accountId == ACCOUNT_ID_BOT:
         return HttpResponse('Webhook received', status=200)
 
@@ -68,10 +69,10 @@ def chatwork_webhook(request):
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
     # get message from room 1234
-    res = client.get_messages(account_id=accountId, force=True)
+    res = client.get_messages(from_account_id=from_account_id, force=True)
 
     # post message to room 1234
-    client.post_messages(account_id=accountId, message=translated)
+    client.post_messages(account_id=from_account_id, message=translated)
 
 
     return HttpResponse('Webhook received', status=200)
