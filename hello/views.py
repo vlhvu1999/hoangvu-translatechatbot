@@ -33,7 +33,7 @@ def chatwork_webhook(request):
     ACCOUNT_ID_BOT = 5130876
     CHECK = "[To:5130876]Bot_Translate"
     CHECK2 ="[To:5130876]"
-    CHECK3 = "#"
+    CHECK3 = "##"
 
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
@@ -44,8 +44,8 @@ def chatwork_webhook(request):
 
     if not CHECK3 in messageChat:
         return HttpResponse('Webhook received', status=200)
-    elif CHECK3 != messageChat[0]:
-        return HttpResponse('Webhook received', status=200)
+#     elif CHECK3 != messageChat[0]:
+#         return HttpResponse('Webhook received', status=200)
 
 #     FormACI = payload["webhook_event"]["from_account_id"]
 #     messageChat = messageChat.replace(CHECK,"\n")
