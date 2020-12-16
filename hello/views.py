@@ -30,7 +30,7 @@ def decode_payload(request):
 
 @csrf_exempt
 def chatwork_webhook(request):
-
+    print("Da vao")
     ACCOUNT_ID_BOT = 5130876
     CHECK = "#"
 
@@ -48,6 +48,7 @@ def chatwork_webhook(request):
     #account_id bot not translate
     accountId = payload["webhook_event"]["account_id"]
     from_account_id = payload["webhook_event"]["from_account_id"]
+    print("aaaaaaa"+ from_account_id)
     if accountId == ACCOUNT_ID_BOT:
         return HttpResponse('Webhook received', status=200)
 
