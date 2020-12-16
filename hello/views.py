@@ -71,10 +71,10 @@ def chatwork_webhook(request):
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
     # get message from room 1234
-    res = client.get_messages(from_account_id=from_account_id, force=True)
+    res = client.get_messages(from_account_id='197290924', force=True)
 
     # post message to room 1234
-    client.post_messages(account_id=from_account_id, message=translated)
+    client.post_messages(account_id='197290924', message=translated)
 
 
     return HttpResponse('Webhook received', status=200)
