@@ -33,30 +33,32 @@ def chatwork_webhook(request):
     ACCOUNT_ID_BOT = 5130876
     CHECK = "[To:5130876]Bot_Translate"
     CHECK2 ="[To:5130876]"
+    CHECK3 = "#"
 
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
-    FormACI = payload["webhook_event"]["from_account_id"]
+#     FormACI = payload["webhook_event"]["from_account_id"]
     print(messageChat)
 
     #systax
 
-#     if not CHECK in messageChat:
-#         return HttpResponse('Webhook received', status=200)
-#     elif CHECK != messageChat[0]:
-#         return HttpResponse('Webhook received', status=200)
+    if not CHECK3 in messageChat:
+        return HttpResponse('Webhook received', status=200)
+    elif CHECK3 != messageChat[0]:
+        return HttpResponse('Webhook received', status=200)
 
 #     FormACI = payload["webhook_event"]["from_account_id"]
-    messageChat = messageChat.replace(CHECK,"\n")
-    messageChat = messageChat.replace(CHECK2,"\n")
+#     messageChat = messageChat.replace(CHECK,"\n")
+#     messageChat = messageChat.replace(CHECK2,"\n")
+    messageChat = messageChat.replace(CHECK3,"\n")
 
     #account_id bot not translate
-#     accountId = payload["webhook_event"]["account_id"]
+    accountId = payload["webhook_event"]["account_id"]
     # get message from room id
     roomId = payload["webhook_event"]["room_id"]
 
-#     if accountId == ACCOUNT_ID_BOT:
-#         return HttpResponse('Webhook received', status=200)
+    if accountId == ACCOUNT_ID_BOT:
+        return HttpResponse('Webhook received', status=200)
 
 
     #translate message
@@ -71,7 +73,7 @@ def chatwork_webhook(request):
 
     translated = translator.translate(messageChat, lang_src=lang, lang_tgt=locale)
 
-    messageChat_re = "[To:" + format(FormACI) + "]\n" + format(translated)
+    messageChat_re = "[To:" + format(accountId) + "]\n" + format(translated)
 
     #Send Data back to chatwork
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
