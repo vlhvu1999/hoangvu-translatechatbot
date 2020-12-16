@@ -52,8 +52,8 @@ def chatwork_webhook(request):
 #     json_string = json.dumps(from_account_id)
 #     print("from_account_id" + json_string)
 
-#     if accountId == ACCOUNT_ID_BOT:
-#         return HttpResponse('Webhook received', status=200)
+    if accountId == ACCOUNT_ID_BOT:
+        return HttpResponse('Webhook received', status=200)
 
 
     #translate message
