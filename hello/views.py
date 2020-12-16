@@ -57,6 +57,10 @@ def chatwork_webhook(request):
     lang = detect(messageChat)
 
     locale = "vi"
+    
+    if lang == "en":
+        locale = "vi"
+        
     if lang == "vi":
         locale = "ja"
 
