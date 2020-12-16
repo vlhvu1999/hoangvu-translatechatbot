@@ -49,8 +49,6 @@ def chatwork_webhook(request):
     accountId = payload["webhook_event"]["account_id"]
     from_account_id = payload["webhook_event"]["from_account_id"]
     accountId = payload["webhook_event"]["account_id"]
-    webhook_event_type = payload["webhook_event_type"]
-    print("webhook_event_type" + webhook_event_type)
     print("from_account_id" + from_account_id)
     if accountId == ACCOUNT_ID_BOT:
         return HttpResponse('Webhook received', status=200)
