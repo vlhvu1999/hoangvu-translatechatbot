@@ -45,7 +45,7 @@ def chatwork_webhook(request):
     FormACI = payload["webhook_event"]["from_account_id"]
     messageChat = messageChat.replace(CHECK,"\n")
     messageChat = messageChat.replace(CHECK2,"\n")
-    messageChat = "[To:" .format(FormACI). "]\n"
+
     #account_id bot not translate
 #     accountId = payload["webhook_event"]["account_id"]
     # get message from room id
@@ -70,6 +70,7 @@ def chatwork_webhook(request):
 
     translated = translator.translate(messageChat, lang_src=lang, lang_tgt=locale)
 
+    messageChat_re = "[To:" + format(FormACI) + "]\n" + translated
 
     #Send Data back to chatwork
     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
@@ -77,6 +78,6 @@ def chatwork_webhook(request):
     res = client.get_messages(room_id=roomId, force=True)
 
     # post message to room 1234
-    client.post_messages(room_id=roomId, message=translated)
+    client.post_messages(room_id=roomId, message=messageChat_re)
 
     return HttpResponse('Webhook received', status=200)
