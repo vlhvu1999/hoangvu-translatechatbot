@@ -78,7 +78,7 @@ def chatwork_webhook(request):
     #Send Data back to chatwork
 #     client = ch.ChatworkClient('fd0602c43dd83cae39e7ebfb08d5793d')
 
-    client = ch.ChatworkClient('6ea469a41f584dc23c13f0f79c23d643=')
+    client = ch.ChatworkClient('6ea469a41f584dc23c13f0f79c23d643')
     res = client.get_messages(room_id=roomId, force=True)
 
     # post message to room 1234
