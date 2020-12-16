@@ -32,7 +32,7 @@ def decode_payload(request):
 def chatwork_webhook(request):
     ACCOUNT_ID_BOT = 5130876
     CHECK = "[To:5130876]Bot_Translate"
-    CHECK2 = "[To:5130876]"
+    CHECK2 ="[To:5130876]"
 
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
@@ -40,14 +40,14 @@ def chatwork_webhook(request):
 
     #systax
 
-    if not CHECK in messageChat:
-        return HttpResponse('Webhook received', status=200)
-    elif CHECK != messageChat[0]:
-        return HttpResponse('Webhook received', status=200)
+#     if not CHECK in messageChat:
+#         return HttpResponse('Webhook received', status=200)
+#     elif CHECK != messageChat[0]:
+#         return HttpResponse('Webhook received', status=200)
 
 #     FormACI = payload["webhook_event"]["from_account_id"]
     messageChat = messageChat.replace(CHECK,"\n")
-#     messageChat = messageChat.replace(CHECK2,"\n")
+    messageChat = messageChat.replace(CHECK2,"\n")
 
     #account_id bot not translate
 #     accountId = payload["webhook_event"]["account_id"]
@@ -64,7 +64,7 @@ def chatwork_webhook(request):
     lang = detect(messageChat)
 
     locale = "vi"
-        
+
     if lang == "vi":
         locale = "ja"
 
