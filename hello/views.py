@@ -39,9 +39,9 @@ def chatwork_webhook(request):
 
     #systax
 
-    if not CHECK2 in messageChat:
+    if not CHECK in messageChat:
         return HttpResponse('Webhook received', status=200)
-    elif CHECK2 != messageChat[0]:
+    elif CHECK != messageChat[0]:
         return HttpResponse('Webhook received', status=200)
 
     FormACI = payload["webhook_event"]["from_account_id"]
