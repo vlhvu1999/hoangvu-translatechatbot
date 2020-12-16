@@ -33,8 +33,7 @@ def chatwork_webhook(request):
     print("Da vao")
     ACCOUNT_ID_BOT = 5130876
     CHECK = "#"
-    # get message from room 1234
-    roomId = payload["webhook_event"]["room_id"]
+
     res = client.get_messages(room_id=roomId, force=True)
     payload = decode_payload(request)
 
@@ -48,14 +47,15 @@ def chatwork_webhook(request):
     messageChat = messageChat.replace(CHECK,"")
 
     #account_id bot not translate
-    accountId = payload["webhook_event"]["account_id"]
-
+#     accountId = payload["webhook_event"]["account_id"]
+    # get message from room id
+    roomId = payload["webhook_event"]["room_id"]
 #     from_account_id = payload["webhook_event"]["from_account_id"]
 #     json_string = json.dumps(from_account_id)
 #     print("from_account_id" + json_string)
 
-    if accountId == ACCOUNT_ID_BOT:
-        return HttpResponse('Webhook received', status=200)
+#     if accountId == ACCOUNT_ID_BOT:
+#         return HttpResponse('Webhook received', status=200)
 
 
     #translate message
