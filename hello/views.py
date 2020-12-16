@@ -31,7 +31,7 @@ def decode_payload(request):
 @csrf_exempt
 def chatwork_webhook(request):
     ACCOUNT_ID_BOT = 5130876
-#     CHECK = "#"
+    CHECK = "[To:5130876]Bot_Translate"
 
     payload = decode_payload(request)
     messageChat = payload["webhook_event"]["body"]
@@ -42,7 +42,7 @@ def chatwork_webhook(request):
 #         return HttpResponse('Webhook received', status=200)
 #     elif CHECK != messageChat[0]:
 #         return HttpResponse('Webhook received', status=200)
-#     messageChat = messageChat.replace(CHECK,"")
+    messageChat = messageChat.replace(CHECK,"\n")
 
     #account_id bot not translate
 #     accountId = payload["webhook_event"]["account_id"]
