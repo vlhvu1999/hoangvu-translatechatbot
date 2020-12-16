@@ -38,10 +38,12 @@ def chatwork_webhook(request):
     print(messageChat)
 
     #systax
-    if not CHECK or not CHECK2 in messageChat:
+
+    if not CHECK2 in messageChat:
         return HttpResponse('Webhook received', status=200)
-    elif CHECK != messageChat[0] or CHECK2 != messageChat[0]:
+    elif CHECK2 != messageChat[0]:
         return HttpResponse('Webhook received', status=200)
+
     FormACI = payload["webhook_event"]["from_account_id"]
     messageChat = messageChat.replace(CHECK,"\n")
     messageChat = messageChat.replace(CHECK2,"\n")
@@ -50,9 +52,6 @@ def chatwork_webhook(request):
 #     accountId = payload["webhook_event"]["account_id"]
     # get message from room id
     roomId = payload["webhook_event"]["room_id"]
-#     from_account_id = payload["webhook_event"]["from_account_id"]
-#     json_string = json.dumps(from_account_id)
-#     print("from_account_id" + json_string)
 
 #     if accountId == ACCOUNT_ID_BOT:
 #         return HttpResponse('Webhook received', status=200)
